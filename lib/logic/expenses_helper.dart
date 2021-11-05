@@ -17,4 +17,11 @@ class ExpensesHelper {
   void deleteExpense(int id) {
     expensesList.removeWhere((element) => element.id == id);
   }
+
+  List<Expense> get recentExpenses {
+    return expensesList.where((expense) {
+      return expense.dateTime
+          .isAfter(DateTime.now().subtract(const Duration(days: 7)));
+    }).toList();
+  }
 }
